@@ -2,14 +2,16 @@
 """module of creating the CMD class"""
 
 import cmd
+import sys
 
 class My_Interpreter(cmd.Cmd):
+    """Custom command line interpreter for 
+    Airbnb project"""
 
-    prompt = '(hbnb) '
+    prompt = "(hbnb) "
 
     def do_EOF(self, line):
-        """End of input for a command or program 
-        that is reading data from the standard input"""
+        """Handle EOF to exit the program"""
         return True
     
     def do_quit(self, line):
@@ -17,7 +19,15 @@ class My_Interpreter(cmd.Cmd):
         return True
     
     def emptyline(self):
+        """pass the emptyline with doing nothing"""
         pass
 
 if __name__ == '__main__':
-    My_Interpreter().cmdloop()
+    shell = My_Interpreter()
+    if len (sys.argv) == 1:
+        shell.cmdloop()
+    else:
+        input_data = sys.argv.read()
+        for command in input_data.splitlines():
+            shell.onecmd(command)
+        
