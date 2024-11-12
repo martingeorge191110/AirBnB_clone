@@ -16,8 +16,8 @@ class My_Interpreter(cmd.Cmd):
         """quit the interpreter"""
         return True
     
-    def postloop(self):
-        print
+    def emptyline(self):
+        pass
 
 if __name__ == '__main__':
     My_Interpreter().cmdloop()
