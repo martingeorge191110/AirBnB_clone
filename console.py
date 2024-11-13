@@ -2,10 +2,9 @@
 """module of creating the CMD class"""
 
 import cmd
-import sys
 
 
-class My_Interpreter(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     """Custom command line interpreter for
     Airbnb project"""
 
@@ -16,7 +15,7 @@ class My_Interpreter(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        """quit the interpreter"""
+        """Quit command to exit the program"""
         return True
 
     def emptyline(self):
@@ -25,10 +24,4 @@ class My_Interpreter(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    shell = My_Interpreter()
-    if len(sys.argv) == 1:
-        shell.cmdloop()
-    else:
-        input_data = sys.argv.read()
-        for command in input_data.splitlines():
-            shell.onecmd(command)
+    HBNBCommand().cmdloop()
