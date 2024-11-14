@@ -99,6 +99,7 @@ class HBNBCommand(cmd.Cmd):
 
         if key not in storage.all():
             print("** no instance found **")
+            return
 
         del storage.all()[key]
         storage.save()
@@ -121,6 +122,56 @@ class HBNBCommand(cmd.Cmd):
         else:
             all_inst = [str(obj) for obj in storage.all().values()]
             print(all_inst)
+
+    def do_update(self, args):
+        """Updates an instance based on the class name 
+        and id by adding or updating attribute then
+        the change saved"""
+        if not args:
+            print("** class name missing **")
+            return
+        else:
+            cmd_line = args.split()
+            class_name = cmd_line[0]
+
+            if class_name not in HBNBCommand.classes:
+                print("** class doesn't exist **")
+                return
+
+            if len(cmd_line) < 2:
+                print("** instance id missing **")
+                return
+
+            inst_id = cmd_line[1]
+            key = f"{class_name}.{inst_id}"
+
+            if key not in storage.all():
+                print("** no instance found **")
+                return
+
+            if len(cmd_line) < 3:
+                print("** attribute name missing **")
+                return
+
+            attr_name = cmd_line[2]
+
+            if len(cmd_line) < 4:
+                print("** value missing **")
+                return
+
+            attr_value = cmd_line[3].strip("\"")
+
+            curr_value = getattr(obj, attr_name, None)
+
+            if curr_value is not None:
+                if isinstance(curr_value, float):
+                    attr_value = float(attr_value)
+                if isinstance(curr_value, int):
+                    attr_value = int(attr_value)
+
+            obj = storage.all()[key]
+            setattr(obj, attr_name, attr_value)
+            obj.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
