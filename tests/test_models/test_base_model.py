@@ -13,6 +13,7 @@ class BasemodelTest(unittest.TestCase):
         """Initializes for the tests."""
         self.test = BaseModel()
         self.dict = self.test.to_dict()
+        self.test_kwargs_init = BaseModel(id="123123")
 
     def test_instance_creation(self):
         """Testing if BaseModel is created correctly."""
@@ -35,6 +36,11 @@ class BasemodelTest(unittest.TestCase):
             "updated_at": self.test.updated_at.isoformat(),
         }
         self.assertEqual(self.dict, out_dict)
+
+    def test_kwargs(self):
+        out_put = "[BaseModel] (123123) {'id': '123123'}"
+        self.assertEqual(self.test_kwargs_init.__str__(), out_put)
+
 
 if __name__ == '__main__':
     unittest.main()
