@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module to create a FileStorage class"""
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -36,6 +37,10 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as file:
                 content = file.read()
                 obj_deserialized = json.loads(content)
-                FileStorage.__objects = obj_deserialized
+
+                for key, val in obj_deserialized.items():
+                    class_name = key.split(".")[0]
+                    if class_name == "BaseModel":
+                        FileStorage.__objects[key] = BaseModel(**val)
         except Exception:
             pass

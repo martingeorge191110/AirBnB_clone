@@ -1,24 +1,24 @@
 #!/usr/bin/python3
 
 """module for unittesting of Basemodel class methods"""
-
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
 
+
 class BasemodelTest(unittest.TestCase):
     """Test cases for BaseModel Class"""
 
-    def set_Up(self):
+    def setUp(self):
         """Initializes for the tests."""
         self.test = BaseModel()
         self.dict = self.test.to_dict()
 
     def test_instance_creation(self):
-        """Testting if BaseModel is created correctly."""
+        """Testing if BaseModel is created correctly."""
         self.assertIsInstance(self.test, BaseModel)
-        self.assertIsInstance(self.test.created_at, datetime.now())
-        self.assertIsInstance(self.test.updated_at, datetime.now())
+        self.assertIsInstance(self.test.created_at, datetime)
+        self.assertIsInstance(self.test.updated_at, datetime)
 
     def test_save(self):
         """Testting save method"""
