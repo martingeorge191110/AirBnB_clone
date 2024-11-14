@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """module of creating the CMD class"""
-
 import cmd
 from models.base_model import BaseModel
 from models import storage
+
 
 class HBNBCommand(cmd.Cmd):
     """Custom command line interpreter for
@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
     classes = {
-        "BaseModel" : BaseModel
+        "BaseModel": BaseModel
     }
 
     def do_EOF(self, line):
@@ -27,9 +27,9 @@ class HBNBCommand(cmd.Cmd):
         """pass the emptyline with doing nothing"""
         pass
 
-    def do_create(self,args):
-        """create new instance, 
-        saves it (to the JSON file) and prints the id"""
+    def do_create(self, args):
+        """create new instance
+        , saves it (to the JSON file) and prints the id"""
         if not args:
             print("** class name missing **")
             return
@@ -49,7 +49,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, args):
-        """Prints the string representation 
+        """Prints the string representation
         of an instance based on the class name and id"""
         cmd_line = args.split()
 
@@ -124,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
             print(all_inst)
 
     def do_update(self, args):
-        """Updates an instance based on the class name 
+        """Updates an instance based on the class name
         and id by adding or updating attribute then
         the change saved"""
         if not args:
@@ -172,6 +172,7 @@ class HBNBCommand(cmd.Cmd):
             obj = storage.all()[key]
             setattr(obj, attr_name, attr_value)
             obj.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
