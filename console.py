@@ -19,12 +19,12 @@ class HBNBCommand(cmd.Cmd):
 
     classes = {
         "BaseModel": BaseModel,
-        "User" : User,
-        "State" : State,
-        "Review" : Review,
-        "Place" : Place,
-        "City" : City,
-        "Amenity" : Amenity
+        "User": User,
+        "State": State,
+        "Review": Review,
+        "Place": Place,
+        "City": City,
+        "Amenity": Amenity
     }
 
     def do_EOF(self, line):
