@@ -2,6 +2,12 @@
 """Module to create a FileStorage class"""
 import json
 from models.base_model import BaseModel
+from models.user import User
+from models.place import Place
+from models.city import City
+from models.state import State
+from models.review import Review
+from models.amenity import Amenity
 
 
 class FileStorage:
@@ -37,10 +43,20 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as file:
                 content = file.read()
                 obj_deserialized = json.loads(content)
+                class_types = {
+                    "BaseModel": BaseModel,
+                    "User": User,
+                    "Place": Place,
+                    "Review": Review,
+                    "Amenity": Amenity,
+                    "State": State,
+                    "City": City
+                }
 
                 for key, val in obj_deserialized.items():
                     class_name = key.split(".")[0]
-                    if class_name == "BaseModel":
-                        FileStorage.__objects[key] = BaseModel(**val)
+                    class_value = class_types[class_name]
+                    FileStorage.__objects[key] = class_value(**val)
+
         except Exception:
             pass
