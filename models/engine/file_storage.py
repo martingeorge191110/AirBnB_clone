@@ -35,7 +35,7 @@ class FileStorage:
             obj_serialized[key] = val.to_dict()
 
         with open(FileStorage.__file_path, 'w', encoding="utf=8") as file:
-            json.dumps(obj_serialized, file)
+            file.write(json.dumps(obj_serialized))
 
     def reload(self):
         """Function deserializes the JSON file to __objects"""
