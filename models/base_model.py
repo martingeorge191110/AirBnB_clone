@@ -15,14 +15,15 @@ class BaseModel:
 
         if kwargs:
             for key, value in kwargs.items():
-                if key == "created_at":
-                    self.created_at = datetime.strptime(
-                        value, "%Y-%m-%dT%H:%M:%S.%f"
-                        )
-                elif key == "updated_at":
-                    self.updated_at = datetime.strptime(
-                        value, "%Y-%m-%dT%H:%M:%S.%f"
-                        )
+                if key == "updated_at" or key == "created_at":
+                    if key == "updated_at":
+                        self.created_at = datetime.strptime(
+                            value, "%Y-%m-%dT%H:%M:%S.%f"
+                            )
+                    else:
+                        self.updated_at = datetime.strptime(
+                            value, "%Y-%m-%dT%H:%M:%S.%f"
+                            )
                 if key != '__class__':
                     setattr(self, key, value)
         else:
