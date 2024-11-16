@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = cmd_line[0]
 
-        if cmd_line not in HBNBCommand.classes:
+        if class_name not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
 
@@ -157,9 +157,13 @@ class HBNBCommand(cmd.Cmd):
             inst_id = cmd_line[1]
             key = f"{class_name}.{inst_id}"
 
-            if key not in storage.all():
+            all_objects = storage.all()
+
+            if key not in all_objects:
                 print("** no instance found **")
                 return
+
+            obj = all_objects[key]
 
             if len(cmd_line) < 3:
                 print("** attribute name missing **")
